@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VectorMatch // AI-Native Alignment Engine</title>
+    <!-- Tailwind CSS for UI Layout -->
+    <script src="https://jsdelivr.net"></script>
+    <!-- Chart.js for High-Dimensional Vector Visualization -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen">
+
+    <!-- Top Navigation Bar -->
+    <nav class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="h-8 w-8 rounded-lg bg-emerald-500 flex items-center justify-center font-black text-slate-950 tracking-tighter">V</div>
+            <span class="text-xl font-bold tracking-tight text-white">Vector<span class="text-emerald-400">Match</span></span>
+            <span class="text-xs bg-slate-800 text-slate-400 px-2.5 py-0.5 rounded-full border border-slate-700">Prototype v1.0</span>
+        </div>
+        <div class="text-sm text-slate-400">
+            Engine Status: <span class="text-emerald-400 font-mono animate-pulse">● Operational</span>
+        </div>
+    </nav>
+
+    <!-- Main Workspace Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Left Panel: Input Tuning Sliders -->
+        <div class="space-y-6 lg:col-span-1">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <h2 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                    <span>🎛️</span> Culture Vector Controls
+                </h2>
+                <p class="text-xs text-slate-400 mb-6">Simulate and adjust operational dimensions in real time to calculate semantic distance weights.</p>
+                
+                <div class="space-y-5">
+                    <!-- Dimension 1: Autonomy -->
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">Autonomy (vs. Guardrails)</span>
+                            <span id="val-autonomy" class="font-mono text-emerald-400 font-bold">0.00</span>
+                        </div>
+                        <input type="range" id="slider-autonomy" min="-1" max="1" step="0.1" value="0.2" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-0.5">
+                            <span>Strict Checklists</span>
+                            <span>Loose Outcomes</span>
+                        </div>
+                    </div>
+
+                    <!-- Dimension 2: Velocity -->
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">Velocity (vs. Deep Work)</span>
+                            <span id="val-velocity" class="font-mono text-emerald-400 font-bold">0.00</span>
+                        </div>
+                        <input type="range" id="slider-velocity" min="-1" max="1" step="0.1" value="-0.4" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-0.5">
+                            <span>Asynchronous Deep</span>
+                            <span>Hyper-Iterative</span>
+                        </div>
+                    </div>
+
+                    <!-- Dimension 3: Topology -->
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">Collaboration Topology</span>
+                            <span id="val-topology" class="font-mono text-emerald-400 font-bold">0.00</span>
+                        </div>
+                        <input type="range" id="slider-topology" min="-1" max="1" step="0.1" value="0.6" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-0.5">
+                            <span>Isolated Execution</span>
+                            <span>Cross-Functional</span>
+                        </div>
+                    </div>
+
+                    <!-- Dimension 4: Syntax -->
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">Communication Syntax</span>
+                            <span id="val-syntax" class="font-mono text-emerald-400 font-bold">0.00</span>
+                        </div>
+                        <input type="range" id="slider-syntax" min="-1" max="1" step="0.1" value="-0.1" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-0.5">
+                            <span>Radical / Direct</span>
+                            <span>Diplomatic / Academic</span>
+                        </div>
+                    </div>
+
+                    <!-- Dimension 5: Risk -->
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">Risk Profile</span>
+                            <span id="val-risk" class="font-mono text-emerald-400 font-bold">0.00</span>
+                        </div>
+                        <input type="range" id="slider-risk" min="-1" max="1" step="0.1" value="0.5" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-0.5">
+                            <span>Risk-Mitigated</span>
+                            <span>Break-and-Fix</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Context Info Card -->
+            <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-5 text-xs text-slate-400 space-y-2">
+                <span class="font-bold text-slate-200 block mb-1">💡 Prototype Mechanics</span>
+                <p>The system bypasses self-reported answers entirely. Moving these controls simulates changing automated outputs parsed natively from data sources like Git commit rhythms, pull-request intervals, documentation syntax, and public engineering blogs.</p>
+            </div>
+        </div>
+
+        <!-- Right Panel: Visual Dashboard & Match Queue (Spans 2 columns) -->
+        <div class="space-y-6 lg:col-span-2">
+            
+            <!-- Dynamic Vector Analysis Visualization Header -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between md:col-span-2">
+                    <div>
+                        <span class="text-xs text-slate-400 uppercase font-semibold tracking-wider">Active Target Pipeline</span>
+                        <h1 id="active-company-name" class="text-xl font-extrabold text-white mt-1">Stripe Core Platform Team</h1>
+                        <p class="text-xs text-slate-400 mt-1">Baseline vector calculated from 14,200 cross-referenced communication & workflow artifacts.</p>
+                    </div>
+                    <div class="pt-4 flex gap-2">
+                        <button onclick="switchCompany('stripe')" id="btn-stripe" class="px-3 py-1 text-xs rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">Stripe Engine</button>
+                        <button onclick="switchCompany('nasa')" id="btn-nasa" class="px-3 py-1 text-xs rounded-md bg-slate-800 text-slate-400 border border-transparent font-medium hover:bg-slate-700">NASA Flight Soft</button>
+                        <button onclick="switchCompany('early')" id="btn-early" class="px-3 py-1 text-xs rounded-md bg-slate-800 text-slate-400 border border-transparent font-medium hover:bg-slate-700">Pre-Seed FinTech</button>
+                    </div>
+                </div>
+
+                <!-- Match Coefficient Indicator -->
+                <div class="bg-gradient-to-br from-slate-900 to-emerald-950/40 border border-slate-800 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+                    <span class="text-xs text-slate-400 font-semibold tracking-wider uppercase mb-1">Cosine Proximity</span>
+                    <div id="match-percentage" class="text-4xl font-black text-emerald-400 tracking-tight">0.0%</div>
+                    <span id="match-label" class="text-[11px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full mt-2">Optimal Alignment</span>
+                </div>
+            </div>
+
+            <!-- Chart Matrix Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                <!-- Vector Geometry Visual Layer -->
+                <div class="md:col-span-3 flex items-center justify-center min-h-[280px]">
+                    <canvas id="vectorChart"></canvas>
+                </div>
+
+                <!-- Live Vector Log Readouts -->
+                <div class="md:col-span-2 space-y-4 flex flex-col justify-center border-t md:border-t-0 md:border-l border-slate-800 pt-4 md:pt-0 md:pl-6">
